@@ -25,7 +25,6 @@ public class uzdevums1 {
 			System.out.println("Ievadi "+(i+1)+". studentu");
 			studenti[i] = scan.next();
 		}
-		scan.close();
 	}
 	public static void ievaditKriterijus(){
 		do {
@@ -47,7 +46,6 @@ public class uzdevums1 {
 					(kriterijaSvars[0]==100 && kritSk > 1));
 			maxSvars -= kriterijaSvars[i];
 		}
-		scan.close();
 	}
 	
 	public static void ievaditVertejumu(){
@@ -80,7 +78,22 @@ public class uzdevums1 {
 	}
 	
 	public static void main(String[] args) {
-		
-		
+		Scanner dati = new Scanner(System.in);
+		int izvele;
+		do{
+			System.out.println("1-Ievadit Stundetus | 2. Ievadit kriterijus| 3. Ievadit vertejumu| 4. Izvadit datus. |5. Apturet");
+			izvele=dati.nextInt();
+			switch(izvele){
+			case 1: 
+				ievaditSkolenus();
+			case 2: 
+				ievaditKriterijus();
+			case 3:
+				ievaditVertejumu();
+			case 4:
+				izvaditRez();
+			}
+		}while(izvele!=5);
 	}
 }
+
