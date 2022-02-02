@@ -11,27 +11,25 @@ public class uzdevums1 {
 	public static double[] semestraVertejums = new double[studSk];
 	public static String[] kriteriji;
 	public static String[] studenti;
-	static Scanner scan = new Scanner(System.in);
 	public static DecimalFormat df = new DecimalFormat("0.#");
 	
-	public static void ievaditSkolenus(){
+	public static void ievaditSkolenusKrit(){
+		Scanner scan = new Scanner(System.in);
 		do {
 			System.out.println("Cik studentiem aprēķināsi gala vērtējumu?");
 			studSk = scan.nextInt();
 		}while(studSk<1);
-		String[] studenti = new String[studSk];
+		studenti = new String[studSk];
 		
 		for(int i=0; i<studenti.length; i++) {
 			System.out.println("Ievadi "+(i+1)+". studentu");
 			studenti[i] = scan.next();
 		}
-	}
-	public static void ievaditKriterijus(){
 		do {
 			System.out.println("Kāds būs kritēriju skaits?");
 			kritSk = scan.nextInt();
 		}while(kritSk<1);
-		String[] kriteriji = new String[kritSk];
+		kriteriji = new String[kritSk];
 		
 		int maxSvars = 100;
 		for(int i=0; i<kriteriji.length; i++) {
@@ -46,9 +44,11 @@ public class uzdevums1 {
 					(kriterijaSvars[0]==100 && kritSk > 1));
 			maxSvars -= kriterijaSvars[i];
 		}
+		scan.close();
 	}
 	
 	public static void ievaditVertejumu(){
+		Scanner scan = new Scanner(System.in);
 		for(int i=0; i<kriterijaVertejums.length; i++) {
 			for(int j=0; j<kriterijaVertejums[i].length; j++) {
 				do {
@@ -57,6 +57,7 @@ public class uzdevums1 {
 				}while(kriterijaVertejums[i][j]<0 || kriterijaVertejums[i][j]>10);
 			}
 		}
+		scan.close();
 	}
 	
 	public static void izvaditRez(){
@@ -78,22 +79,29 @@ public class uzdevums1 {
 	}
 	
 	public static void main(String[] args) {
-		Scanner dati = new Scanner(System.in);
+		Scanner scan = new Scanner(System.in);
 		int izvele;
 		do{
 			System.out.println("1-Ievadit Stundetus | 2. Ievadit kriterijus| 3. Ievadit vertejumu| 4. Izvadit datus. |5. Apturet");
-			izvele=dati.nextInt();
+			izvele=scan.nextInt();
 			switch(izvele){
 			case 1: 
-				ievaditSkolenus();
-			case 2: 
-				ievaditKriterijus();
+				ievaditSkolenusKrit();
+				break;
 			case 3:
 				ievaditVertejumu();
+				break;
 			case 4:
 				izvaditRez();
+				break;
+				case 5:
+					System.out.println("Programma apturēta!");
+					break;
+				default:
+					System.out.println("Darbība nepastāv!");
 			}
 		}while(izvele!=5);
+		scan.close();
 	}
 }
 
