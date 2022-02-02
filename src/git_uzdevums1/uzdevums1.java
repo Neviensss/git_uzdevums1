@@ -3,34 +3,37 @@ package git_uzdevums1;
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
+
 public class uzdevums1 {
-	public static void main(String[] args) {
-		int studSk, kritSk;
-		Scanner scan = new Scanner(System.in);
-		DecimalFormat df = new DecimalFormat("0.#");
-		     
+	public static int studSk, kritSk;
+	public static int[] kriterijaSvars = new int[kritSk];
+	public static int[][] kriterijaVertejums = new int[studSk][kritSk];
+	public static double[] semestraVertejums = new double[studSk];
+	public static String[] kriteriji;
+	public static String[] studenti;
+	static Scanner scan = new Scanner(System.in);
+	public static DecimalFormat df = new DecimalFormat("0.#");
+	
+	public static void ievaditSkolenus(){
 		do {
 			System.out.println("Cik studentiem aprēķināsi gala vērtējumu?");
 			studSk = scan.nextInt();
 		}while(studSk<1);
 		String[] studenti = new String[studSk];
 		
+		for(int i=0; i<studenti.length; i++) {
+			System.out.println("Ievadi "+(i+1)+". studentu");
+			studenti[i] = scan.next();
+		}
+		scan.close();
+	}
+	public static void ievaditKriterijus(){
 		do {
 			System.out.println("Kāds būs kritēriju skaits?");
 			kritSk = scan.nextInt();
 		}while(kritSk<1);
 		String[] kriteriji = new String[kritSk];
-		int[] kriterijaSvars = new int[kritSk];
-		int[][] kriterijaVertejums = new int[studSk][kritSk];
-		double[] semestraVertejums = new double[studSk];
 		
-		//Ievada studentu vārdus, uzvārdus
-		for(int i=0; i<studenti.length; i++) {
-			System.out.println("Ievadi "+(i+1)+". studentu");
-			studenti[i] = scan.next();
-		}
-		
-		//Definē kritērijus
 		int maxSvars = 100;
 		for(int i=0; i<kriteriji.length; i++) {
 			System.out.println("Ievadi "+(i+1)+". kritēriju");
@@ -44,8 +47,10 @@ public class uzdevums1 {
 					(kriterijaSvars[0]==100 && kritSk > 1));
 			maxSvars -= kriterijaSvars[i];
 		}
-		
-		//Norāda vērtējumu kādu ieguvis katrs students par katru kritēriju
+		scan.close();
+	}
+	
+	public static void ievaditVertejumu(){
 		for(int i=0; i<kriterijaVertejums.length; i++) {
 			for(int j=0; j<kriterijaVertejums[i].length; j++) {
 				do {
@@ -54,7 +59,9 @@ public class uzdevums1 {
 				}while(kriterijaVertejums[i][j]<0 || kriterijaVertejums[i][j]>10);
 			}
 		}
-		
+	}
+	
+	public static void izvaditRez(){
 		double rezultats;
 		for(int i=0; i<studenti.length; i++) {
 			rezultats=0;
@@ -70,6 +77,10 @@ public class uzdevums1 {
 			}
 			System.out.println("Semestra vērtējums ir "+df.format(semestraVertejums[i])+"\n");
 		}
-		scan.close();
+	}
+	
+	public static void main(String[] args) {
+		
+		
 	}
 }
